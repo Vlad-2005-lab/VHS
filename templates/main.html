@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div style="display: flex;">
+        <div>
+            <p>
+            <a class="btn btn-primary" style="width: 150px" href="/main/{{current_user.id}}">Моя страница</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/news_fr/{{current_user.id}}">Новости</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/friends/{{current_user.id}}">Друзья</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/sms/{{current_user.id}}">Сообщения</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/video/{{current_user.id}}">Видео</a>
+        </div>
+        <div style="margin-left: 100px; width: 1000px;">
+            <div style="width: 38rem; border-radius: 10px; high: 150px; display: flex;" class="alert alert-warning" role="alert">
+                <div>
+                <div>Имя: {{current_user.name}}</div>
+                <div>Фамилия: {{current_user.surname}}</div>
+                </div>
+                <div style="margin-left: 7rem;">
+                <div>Возраст: {{current_user.age}}</div>
+                <div>Статус: {{current_user.status}}</div>
+                </div>
+            </div>
+            <div>
+                <img style="width: 38rem; border-radius: 10px;" src="/static/avatar/{{current_user.avatar}}" alt="Лол, что-то крашнулось">
+            </div>
+            <p><div style="margin-left: 0px; width: 610px;" class="alert alert-warning" role="alert"><h2 align="center">Ваши новости</h2></div></p>
+            {% for el in sp_news %}
+            <div class="alert alert-primary" role="alert">
+                <h3>{{el.title}}</h3>
+                <div>
+                <p>
+                    <div>
+                <h4>{{el.content}}</h4>
+                <p>
+                    Автор: {{current_user.name}} {{current_user.surname}}
+                    {% if current_user.is_authenticated and current_user == el.user %}
+                        <p>
+                        <a href="/edit_news/{{ el.id }}" class="btn btn-warning">Изменить</a>
+                        <a href="/news_delete/{{ el.id }}" class="btn btn-danger">Удалить</a>
+                {% endif %}
+                    </div>
+                {% if el.Photos %}
+                <div>
+                    <img src="/static/{{el.Photos}}.png" width="550rem" style="margin-left: 10px; margin-top: 0px;" alt="Лол, что-то крашнулась">
+                </div>
+                {% endif %}
+                </div>
+            </div>
+
+                </p>
+            {% endfor %}
+        </div>
+        <div style="margin-left: 100px;">
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/add_news/{{current_user.id}}">Добавить новость</a>
+            <p>
+            <a class="btn btn-warning" style="width: 150px" href="/change_status/{{current_user.id}}">Изменить статус</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/avatar/{{current_user.id}}">Поменять аватар</a>
+        </div>
+    </div>
+{% endblock %}

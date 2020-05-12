@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div style="position: absolute;">
+        <p>
+        <a class="btn btn-primary" style="width: 150px" href="/main/{{current_user.id}}">Моя страница</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/news_fr/{{current_user.id}}">Новости</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/friends/{{current_user.id}}">Друзья</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/sms/{{current_user.id}}">Сообщения</a>
+    </div>
+<form action="" method="post" novalidate>
+    <div>
+        <p style="margin-left: 12%; position: absolute; width: 30%">{{ form.search(class="form-control", maxlength="40", placeholder="Введите статус, который вы бы хотели иметь")}}</p>
+        <p style="margin-left: 58%;">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    </div>
+</form>
+<main role="main" class="container">
+    {% block conten %}
+    {% endblock %}
+</main>
+{% endblock %}

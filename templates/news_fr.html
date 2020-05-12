@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div style="display: flex;">
+    <div>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/main/{{current_user.id}}">Моя страница</a>
+        <p>
+        <a class="btn btn-primary" style="width: 150px" href="/news_fr/{{current_user.id}}">Новости</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/friends/{{current_user.id}}">Друзья</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/sms/{{current_user.id}}">Сообщения</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/video/{{current_user.id}}">Видео</a>
+
+    </div>
+        <div style="margin-left: 100px; width: 1000px;">
+        <p><div style="margin-left: 0px; width: 610px;" class="alert alert-warning" role="alert"><h2 align="center">Новости</h2></div></p>
+            <div data-spy="scroll" data-offset="0" style="position: relative; width: 640px; height: 600px; margin-top: .5rem; overflow-y: auto; overflow-x: hidden;">
+                {% for el in sp_news %}
+                   {% if el.user_id == 1 %}
+                    <div class="alert alert-danger" style="margin-left: 0px; width: 98%;" role="alert">
+                        <h3>{{el.title}}</h3>
+                        <p>
+                        <h4>{{el.content}}</h4>
+                        </p>
+                            <p>Автор: {{sp_autors[loop.index - 1].name}} {{sp_autors[loop.index - 1].surname}}</p>
+                        {% if el.Photos %}
+                    <div>
+                        <img src="/static/{{el.Photos}}.png" width="550rem" style="margin-left: 10px; margin-top: 0px;" alt="Лол, что-то крашнулось">
+                    </div>
+                {% endif %}
+                    </div>
+                        </p>
+                {% else %}
+                    <div class="alert alert-primary" style="margin-left: 0px; width: 98%;" role="alert">
+                        <h3>{{el.title}}</h3>
+                        <p>
+                        <h4>{{el.content}}</h4>
+                        </p>
+                            <p>Автор: {{sp_autors[loop.index - 1].name}} {{sp_autors[loop.index - 1].surname}}</p>
+                        {% if el.Photos %}
+                    <div>
+                        <img src="/static/{{el.Photos}}.png" width="550rem" style="margin-left: 10px; margin-top: 0px;" alt="Лол, что-то крашнулось">
+                    </div>
+                {% endif %}
+                    </div>
+                        </p>
+                {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

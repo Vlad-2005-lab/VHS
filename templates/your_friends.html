@@ -1,0 +1,19 @@
+{% extends "friends.html" %}
+
+{% block conten %}
+        <div data-spy="scroll" data-offset="0" style="margin-left: 15%; position: relative; height: 450px; margin-top: .5rem; overflow-y: auto; overflow-x: hidden;">
+             <div class="card-columns">
+                 {% for el in sp_friends %}
+                            <div class="card" style="width: 18rem;">
+                                <img src="/static/avatar/{{el.avatar}}" class="card-img-top" alt="Лол, что-то крашнулось">
+                                <div class="card-body">
+                                    <p><a href="/f_profile/{{el.id}}" class="card-title">{{el.name}} {{el.surname}}</a></p>
+                                    {% if el.id != 1%}
+                                    <a href="/friends_delete/{{ el.id }}" style="align: right; width: 100%;" class="btn btn-danger">Удалить</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                 {% endfor %}
+             </div>
+        </div>
+{% endblock %}

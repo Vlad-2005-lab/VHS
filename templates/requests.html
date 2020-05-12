@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div style="position: absolute;">
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/main/{{current_user.id}}">Моя страница</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/news_fr/{{current_user.id}}">Новости</a>
+        <p>
+        <a class="btn btn-primary" style="width: 150px" href="/friends/{{current_user.id}}">Друзья</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/sms/{{current_user.id}}">Сообщения</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/video/{{current_user.id}}">Видео</a>
+    </div>
+        <div style="display: flex; margin-left: 16.8%; width: 49.3%;">
+            <a href="/friends/{{ current_user.id }}" style="width: 150px;" class="btn btn-info">Мои друзья</a>
+            <a href="/requests/{{ current_user.id }}" style="width:150px; margin-left: 10px;" class="btn btn-info">Заявки</a>
+        </div>
+<p></p>
+
+    <div data-spy="scroll" data-offset="0" style="margin-left: 15%; position: relative; height: 500px; margin-top: .5rem; overflow-y: auto; overflow-x: hidden;">
+        <div class="card-columns">
+            {% for el in sp_requests %}
+            <div class="card" style="width: 18rem;">
+                <img src="/static/avatar/{{el.avatar}}" class="card-img-top" alt="Лол, что-то крашнулось">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="/f_profile/{{el.id}}">{{el.name}} {{el.surname}}</a></h5>
+                    <a href="/plus_friend/{{ el.id }}" style="width: 100%;" class="btn btn-success">Добавить</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

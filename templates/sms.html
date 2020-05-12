@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div style="position: absolute;">
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/main/{{current_user.id}}">Моя страница</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/news_fr/{{current_user.id}}">Новости</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/friends/{{current_user.id}}">Друзья</a>
+        <p>
+        <a class="btn btn-primary" style="width: 150px" href="/sms/{{current_user.id}}">Сообщения</a>
+        <p>
+        <a class="btn btn-info" style="width: 150px" href="/video/{{current_user.id}}">Видео</a>
+    </div>
+    <form action="" method="post" novalidate>
+        {% if sp_d[1] == True %}
+            <p style="margin-left: 15%; width: 50%; high: 15%;">{{ form.submit(type="submit", style="width: 170%;", class="btn btn-primary") }}</p>
+        {% endif %}
+        {% if sp_d[0] != 0 %}
+            <div data-spy="scroll" data-offset="0" style="margin-left: 15%; position: relative; height: 1000px; margin-top: .5rem; overflow-y: auto; overflow-x: hidden;">
+                <div class="card-columns">
+                     {% for el in sp_d[2:] %}
+                        <div class="card" style="height: 300px;">
+                            <img src="/static/avatar/{{el[2]}}" class="card-img-top" alt="Лол, что-то крашнулось" style=";">
+                            <div class="card-body">
+                                <h5 class="card-title">{{el[0]}}</h5>
+                                <a style="width: 100%;" class="btn btn-primary" href="/perepiska/{{el[1]}}">Write</a>
+                            </div>
+                        </div>
+                     {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <h6 class="alert-heading" style="text-align: center;">У вас нет переписок. Хотите добавить?</h6>
+        {% endif %}
+    </form>
+{% endblock %}

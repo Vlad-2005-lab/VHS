@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex;">
+        <div>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/main/{{current_user.id}}">Моя страница</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/news_fr/{{current_user.id}}">Новости</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/friends/{{current_user.id}}">Друзья</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/sms/{{current_user.id}}">Сообщения</a>
+            <p>
+            <a class="btn btn-primary" style="width: 150px" href="/video/{{current_user.id}}">Видео</a>
+        </div>
+<div data-spy="scroll" data-offset="0" style="margin-left: 15%; position: relative; height: 500px; margin-top: .5rem; overflow-y: auto; overflow-x: hidden;">
+    <div>
+        {% for el in sp_v %}
+        <div style="width: 40rem;">
+            <video src="/static/{{el.name}}" width="600px" height="350px" controls></video>
+            <div>
+                <h5 class="card-title">{{el.title}}</h5>
+                <a href="/append_video/{{ el.id }}" style="width: 94%;" class="btn btn-success">Добавить</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+{% endblock %}

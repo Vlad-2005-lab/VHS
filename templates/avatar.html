@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form enctype="multipart/form-data" method="post">
+    <p>{{ form.file.label }}<br>
+    {{ form.file(class="form-control-file")}}<br>
+    </p>
+    {% for error in form.file.errors %}
+        <p content="alert alert-danger" role="alert">
+            {{ error }}
+        </p>
+    {% endfor %}
+    <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+</form>
+{% endblock %}

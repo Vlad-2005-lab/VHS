@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="position: absolute;">
+    <p>
+    <a class="btn btn-info" style="width: 150px" href="/main/{{current_user.id}}">Моя страница</a>
+    <p>
+    <a class="btn btn-info" style="width: 150px" href="/news_fr/{{current_user.id}}">Новости</a>
+    <p>
+    <a class="btn btn-info" style="width: 150px" href="/friends/{{current_user.id}}">Друзья</a>
+    <p>
+    <a class="btn btn-primary" style="width: 150px" href="/sms/{{current_user.id}}">Сообщения</a>
+    <p>
+    <a class="btn btn-info" style="width: 150px" href="/video/{{current_user.id}}">Видео</a>
+
+</div>
+<form action="" method="post" novalidate>
+    <div data-spy="scroll" data-offset="0" style="margin-left: 20%; position: relative; height: 500px; margin-top: .5rem; overflow: auto;">
+        {% for el in sp_d %}
+        <div style="max-width: 50%;">
+            {% if el.split('~*&^%#^*(^~&%*#(')[0] == current_user.name + ' ' + current_user.surname %}
+                <div style="high: 10%; width: 100%; background-color: #F2F2F2; margin-left: 100%; background-color: aqua; border-radius: 20px 20px 0; padding: 3% 3% 3% 3%;">
+                    <p>{{el.split('~*&^%#^*(^~&%*#(')[0]}}:</p>
+                    {% for ell in el.split('~*&^%#^*(^~&%*#(')[1:-1] %}
+                        <p align="justify">{{ell}}</p>
+                    {% endfor %}
+                    <p>Time: {{el.split('~*&^%#^*(^~&%*#(')[-1]}}</p>
+                </div>
+            {% else %}
+            <div style="high: 10%; width: 100%; background-color: #F2F2F2; margin-left: 0%; background-color: grey;  border-radius: 20px 20px 5px 0;; padding: 3% 3% 3% 3%;">
+                    <p>{{el.split('~*&^%#^*(^~&%*#(')[0]}}:</p>
+                    {% for ell in el.split('~*&^%#^*(^~&%*#(')[1:-1] %}
+                        <p align="justify">{{ell}}</p>
+                    {% endfor %}
+                    <p>Time: {{el.split('~*&^%#^*(^~&%*#(')[-1]}}</p>
+                </div>
+            {% endif %}
+            <p>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="background-color: #F2F2F2; margin-left: 20%;">
+        <p style="position: absolute; width: 41%">{{ form.search(class="form-control", placeholder="Enter message")}}</p>
+        <p style="margin-left: 90%;">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+    </div>
+</form>
+{% endblock %}

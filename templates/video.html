@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div style="display: flex;">
+        <div>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/main/{{current_user.id}}">Моя страница</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/news_fr/{{current_user.id}}">Новости</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/friends/{{current_user.id}}">Друзья</a>
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/sms/{{current_user.id}}">Сообщения</a>
+            <p>
+            <a class="btn btn-primary" style="width: 150px" href="/video/{{current_user.id}}">Видео</a>
+        </div>
+        <form action="" method="post" novalidate>
+        <div>
+            <div style="display: flex;">
+                <p style="margin-left: 100px; width: 600px;">{{ form.search(class="form-control", placeholder="Введите название видео или часть его")}}</p>
+                <p style="margin-left: 20px;">{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+            </div>
+        <div style="margin-left: 100px;">
+            {% for video in sp %}
+                <div>
+                <video src="/static/{{video.name}}" width="600px" height="350px" controls></video>
+                <div style="width: 400px;"><h3>{{ video.title }} <a href="/video_delete/{{ video.id }}" class="btn btn-danger">Удалить</a>
+</h3></div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+        </form>
+
+        <div style="margin-left: 20px;">
+            <p>
+            <a class="btn btn-info" style="width: 150px" href="/add_video/{{current_user.id}}">Добавить видео</a>
+            <p>
+        </div>
+    </div>
+
+{% endblock %}
